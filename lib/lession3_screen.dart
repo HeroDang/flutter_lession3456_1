@@ -2,28 +2,31 @@ import 'package:flutter/material.dart';
 
 
 void main() {
-  int soLanBamNut = 0;
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'My app', // used by the OS task switcher
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('My Test Home Page'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Day la page 2'),
-              ElevatedButton(
-                  onPressed: () {
-                    soLanBamNut++;
-                    print('nut da duoc bam ! $soLanBamNut');
-                  },
-                  child: Text('Click me!'))
-            ],
-          )),
-      )
+      home: buildHomeScreen(),
     ),
+  );
+}
+
+Widget buildHomeScreen () {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text('My Test Home Page'),
+    ),
+    body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Home Screen'),
+            SizedBox(
+              height: 20,
+            ),
+            Image.network('https://codefresher.vn/wp-content/uploads/2022/10/Banner-06-Java-core-848x548.jpg',
+            width: 250,)
+          ],
+        )),
   );
 }
