@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 
@@ -11,7 +13,33 @@ void main() {
   );
 }
 
-class MyHomeScreen extends StatelessWidget {
+class MyHomeScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyHomeScreenState();
+  }
+
+}
+
+class MyHomeScreenState extends State<MyHomeScreen>{
+  List<Color> colors = <Color>[Colors.orange, Colors.blue,Colors.green];
+  Color bg = Colors.transparent;
+  int count = 0;
+
+  void ChangeBackgroungColor() {
+    count++;
+    if(count % 2 == 0){
+      // generates a new Random object
+      final _random = new Random();
+      // generate a random index based on the list length
+      // and use it to retrieve the element
+      Color element = colors[_random.nextInt(colors.length)];
+      setState(() {
+        bg = element;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -19,7 +47,8 @@ class MyHomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('My Test Home Page'),
       ),
-      body: Center(
+      body: Container(
+          color: bg,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -39,16 +68,29 @@ class MyHomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+              ElevatedButton(onPressed: ChangeBackgroungColor,
+                  child: Text("Change color")),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(onPressed: () {
+                setState(() {
+                  bg = Colors.transparent;
+                });
+              },
+                  child: Text("Restart")),
+              SizedBox(
+                height: 20,
+              ),
               ElevatedButton(onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Nut da duoc bam!")));
+                    SnackBar(content: Text("Nut da duoc bam!")));
               },
                   child: Text("Click me!"))
             ],
           )),
     );
   }
-  
 }
 
 
