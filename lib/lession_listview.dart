@@ -1,8 +1,15 @@
-
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class ListViewScreen extends StatelessWidget{
+class ListViewScreen extends StatefulWidget {
+  @override
+  State<ListViewScreen> createState() => _ListViewScreenState();
+}
+
+class _ListViewScreenState extends State<ListViewScreen> {
+  final _random = new Random();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -36,36 +43,77 @@ class ListViewScreen extends StatelessWidget{
                 ],
               ),
             ),
-            SizedBox(height: 20,),
-
+            SizedBox(
+              height: 20,
+            ),
             buildListView(),
-
-            SizedBox(height: 20,),
-            ElevatedButton(onPressed: () {
-              Navigator.pop(context);
-            }, child: Text("Back to screen 1"))
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        countAddItem++;
+                        entries.add(countAddItem.toString());
+                        colorCodes.add(colorCodes[_random.nextInt(colorCodes
+                            .length)]);
+                      });
+                    },
+                    child: Text("Add item")),
+                SizedBox(
+                  width: 10,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      if (countAddItem != 0) {
+                        setState(() {
+                          countAddItem--;
+                          entries.removeLast();
+                          colorCodes.removeLast();
+                        });
+                      }
+                    },
+                    child: Text("Remove item")),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Back to screen 1"))
           ],
         ),
       ),
     );
   }
 
-  Widget buildListView(){
-    final List<String> entries = <String>['A', 'B', 'C','D', 'E', 'F'];
-    final List<int> colorCodes = <int>[600, 500, 400, 300, 200, 100];
+  int countAddItem = 0;
+
+  final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F'];
+
+  final List<int> colorCodes = <int>[600, 500, 400, 300, 200, 100];
+
+  Widget buildListView() {
     return Container(
       height: 150,
-      child: ListView.builder(
-          padding: const EdgeInsets.all(8),
-          itemCount: entries.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 50,
-              color: Colors.blue[colorCodes[index]],
-              child: Center(child: Text('Item ${entries[index]}')),
-            );
-          }
-      ),
+      child: ListView.separated(
+        padding: const EdgeInsets.all(8),
+        itemCount: entries.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            height: 50,
+            color: Colors.blue[colorCodes[index]],
+            child: Center(child: Text('Item ${entries[index]}')),
+          );
+        }, separatorBuilder: (BuildContext context, int index) {
+        return const Divider(thickness: 3, color: Colors.orange, indent: 10, endIndent: 10,);
+      },),
     );
   }
 }
