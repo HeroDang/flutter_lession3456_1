@@ -18,6 +18,9 @@ class MyCalculatorApp extends StatelessWidget {
       title: 'Calculator',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        dividerTheme: const DividerThemeData(
+          thickness: 1, color: Colors.orange, indent: 10, endIndent: 10,
+        )
       ),
       home: const MyHomePage(title: 'Calculator'),
     );

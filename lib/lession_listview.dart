@@ -106,13 +106,20 @@ class _ListViewScreenState extends State<ListViewScreen> {
         padding: const EdgeInsets.all(8),
         itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: 50,
-            color: Colors.blue[colorCodes[index]],
-            child: Center(child: Text('Item ${entries[index]}')),
+          return InkWell(
+            onTap: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Item ${entries[index]}'))
+              );
+            },
+            child: Container(
+              height: 50,
+              //color: Colors.blue[colorCodes[index]],
+              child: Center(child: Text('Item ${entries[index]}')),
+            ),
           );
         }, separatorBuilder: (BuildContext context, int index) {
-        return const Divider(thickness: 3, color: Colors.orange, indent: 10, endIndent: 10,);
+        return const Divider();
       },),
     );
   }
