@@ -3,19 +3,26 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class ListViewScreen extends StatefulWidget {
+  String _sData;
+  ListViewScreen(this._sData,{super.key});
+
   @override
-  State<ListViewScreen> createState() => _ListViewScreenState();
+  State<ListViewScreen> createState() => _ListViewScreenState(_sData);
 }
 
 class _ListViewScreenState extends State<ListViewScreen> {
   final _random = new Random();
+
+  String _sData;
+
+  _ListViewScreenState(this._sData);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("List Screen"),
+        title: Text(_sData),
       ),
       body: SafeArea(
         child: Column(
@@ -84,7 +91,7 @@ class _ListViewScreenState extends State<ListViewScreen> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pop(context, entries);
                 },
                 child: Text("Back to screen 1"))
           ],
