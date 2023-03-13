@@ -16,8 +16,9 @@ class MyCalculatorApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Calculator',
-
+      initialRoute: ROUTES_HOME_SCREEN,
       routes: {
+        ROUTES_HOME_SCREEN: (context) =>  MyHomePage(title: 'Calculator'),
         // When navigating to the "/second" route, build the SecondScreen widget.
         ROUTES_LISTVIEW_SCREEN: (context) =>  ListViewScreen('Navigator bang route'),
       },
@@ -28,11 +29,12 @@ class MyCalculatorApp extends StatelessWidget {
             thickness: 1, color: Colors.orange, indent: 10, endIndent: 10,
           )
       ),
-      home: const MyHomePage(title: 'Calculator'),
+      // home: const MyHomePage(title: 'Calculator'),
     );
   }
 }
 
+const ROUTES_HOME_SCREEN = "/";
 const ROUTES_LISTVIEW_SCREEN = "/listview_screen";
 
 class MyHomePage extends StatefulWidget {
