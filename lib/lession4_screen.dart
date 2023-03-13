@@ -18,17 +18,19 @@ class MyCalculatorApp extends StatelessWidget {
       title: 'Calculator',
       initialRoute: ROUTES_HOME_SCREEN,
       routes: {
-        ROUTES_HOME_SCREEN: (context) =>  MyHomePage(title: 'Calculator'),
+        ROUTES_HOME_SCREEN: (context) => MyHomePage(title: 'Calculator'),
         // When navigating to the "/second" route, build the SecondScreen widget.
-        ROUTES_LISTVIEW_SCREEN: (context) =>  ListViewScreen('Navigator bang route'),
+        ROUTES_LISTVIEW_SCREEN: (context) => ListViewScreen(''),
       },
 
       theme: ThemeData(
           primarySwatch: Colors.blue,
           dividerTheme: const DividerThemeData(
-            thickness: 1, color: Colors.orange, indent: 10, endIndent: 10,
-          )
-      ),
+            thickness: 1,
+            color: Colors.orange,
+            indent: 10,
+            endIndent: 10,
+          )),
       // home: const MyHomePage(title: 'Calculator'),
     );
   }
@@ -128,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all(Colors.blueAccent),
+                              MaterialStateProperty.all(Colors.blueAccent),
                         ),
                         child: Text(
                           "+",
@@ -155,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                            MaterialStateProperty.all(Colors.redAccent),
+                                MaterialStateProperty.all(Colors.redAccent),
                           ),
                           child: Text(
                             "-",
@@ -181,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                            MaterialStateProperty.all(Colors.green),
+                                MaterialStateProperty.all(Colors.green),
                           ),
                           child: Text("x", style: TextStyle(fontSize: 20))),
                       SizedBox(
@@ -204,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                            MaterialStateProperty.all(Colors.orangeAccent),
+                                MaterialStateProperty.all(Colors.orangeAccent),
                           ),
                           child: Text(":", style: TextStyle(fontSize: 20))),
                     ],
@@ -218,9 +220,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () async {
                     var result = await Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                          return ListViewScreen(
-                              "Du lieu truyen vao tu screen 1");
-                        }));
+                      return ListViewScreen("Du lieu truyen vao tu screen 1");
+                    }));
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(result.toString())));
                   },
@@ -229,9 +230,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 20,
               ),
               ElevatedButton(
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green)),
                   onPressed: () async {
-                    var result = await Navigator.pushNamed(context, ROUTES_LISTVIEW_SCREEN);
+                    var result = await Navigator.pushNamed(
+                        context, ROUTES_LISTVIEW_SCREEN,
+                        arguments: 'Navigator bang route');
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(result.toString())));
                   },
