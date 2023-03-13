@@ -16,6 +16,12 @@ class MyCalculatorApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Calculator',
+
+      routes: {
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        ROUTES_LISTVIEW_SCREEN: (context) =>  ListViewScreen('Navigator bang route'),
+      },
+
       theme: ThemeData(
           primarySwatch: Colors.blue,
           dividerTheme: const DividerThemeData(
@@ -26,6 +32,8 @@ class MyCalculatorApp extends StatelessWidget {
     );
   }
 }
+
+const ROUTES_LISTVIEW_SCREEN = "/listview_screen";
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -211,6 +219,17 @@ class _MyHomePageState extends State<MyHomePage> {
                           return ListViewScreen(
                               "Du lieu truyen vao tu screen 1");
                         }));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(result.toString())));
+                  },
+                  child: Text("Go to screen 2")),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
+                  onPressed: () async {
+                    var result = await Navigator.pushNamed(context, ROUTES_LISTVIEW_SCREEN);
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(result.toString())));
                   },

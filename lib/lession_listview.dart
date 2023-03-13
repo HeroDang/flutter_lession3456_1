@@ -23,6 +23,12 @@ class _ListViewScreenState extends State<ListViewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_sData),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.pop(context, entries);
+          },
+        ),
       ),
       body: SafeArea(
         child: Column(
